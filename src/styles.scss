@@ -1,0 +1,42 @@
+/* You can add global styles to this file, and also import other style files */
+
+$scales: 1, 2, 3, 4;
+
+@for $i from 1 to 8 {
+    .p-#{$i} { padding: #{$i * 8}px !important; }
+    .pt-#{$i} { padding-top: #{$i * 8}px !important; }
+    .pr-#{$i} { padding-right: #{$i * 8}px !important; }
+    .pb-#{$i} { padding-bottom: #{$i * 8}px !important; }
+    .pl-#{$i} { padding-left: #{$i * 8}px !important; }
+
+    .m-#{$i}  { margin: #{$i * 8}px; }
+    .mt-#{$i} { margin-top: #{$i * 8}px !important; }
+    .mr-#{$i} { margin-right: #{$i * 8}px !important; }
+    .mb-#{$i} { margin-bottom: #{$i * 8}px !important; }
+    .ml-#{$i} { margin-left: #{$i * 8}px !important; }
+}
+
+* { margin: 0; padding: 0;}
+
+html, body, .fullheight { height: 100vh; }
+
+
+
+.flex {
+    display: flex;
+    &.auto {
+        flex-grow: 1;
+    }
+    &.row {
+        flex-direction: row;
+        
+    }
+    &.column {
+        flex-direction: column;
+    }
+
+    &.center {
+        justify-content: center;
+        align-items: center;
+    }
+}
