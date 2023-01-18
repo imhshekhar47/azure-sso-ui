@@ -1,22 +1,17 @@
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
-  MsalModule,
-  MsalInterceptor,
-  MsalGuard,
-  MsalService,
-  MsalBroadcastService,
-  MsalRedirectComponent,
+  MsalBroadcastService, MsalGuard, MsalInterceptor, MsalModule, MsalRedirectComponent, MsalService
 } from '@azure/msal-angular';
 import { BrowserCacheLocation, InteractionType, LogLevel, PublicClientApplication } from '@azure/msal-browser';
 import { AppRoutingModule } from './app-routing.module';
 
-import { AppComponent } from './app.component';
-import { AppMaterialModule } from './app-material.module';
 import { environment } from 'src/environments/environment';
+import { AppMaterialModule } from './app-material.module';
+import { AppComponent } from './app.component';
+import { UserApiService } from './services/user.service';
 
 @NgModule({
   declarations: [
@@ -44,18 +39,21 @@ import { environment } from 'src/environments/environment';
           loggerCallback: (loglevel: LogLevel, message: String) => {
             console.log(message);
           },
-          logLevel: LogLevel.Info,
+          logLevel: LogLevel.Verbose,
           piiLoggingEnabled: false
         }
       }
     }), {
       interactionType: InteractionType.Redirect, // MSAL Guard Configuration
+      authRequest: {
+        scopes: ['user.read'],
+      }
     }, {
       interactionType: InteractionType.Redirect,
       protectedResourceMap: new Map([
-        ['https://graph.microsoft.com/v1.0/me', ['user.read']],
-        //['https://api.backend.com/users/*', ['user.read']],
-        [`${environment.base_url}/*`, null]
+        ['https://graph.microsoft.com/v1.0/me', [environment.azure.clientScope]],
+        ['http://localhost:8080/api/*', [environment.azure.clientScope]],
+        // [`${environment.base_url}/*`, null]
       ])
     }),
 
@@ -68,7 +66,8 @@ import { environment } from 'src/environments/environment';
     },
     MsalService,
     MsalGuard,
-    MsalBroadcastService
+    MsalBroadcastService,
+    UserApiService,
   ],
   bootstrap: [AppComponent, MsalRedirectComponent]
 })

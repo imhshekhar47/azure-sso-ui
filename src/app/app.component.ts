@@ -1,28 +1,27 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { MsalBroadcastService } from "@azure/msal-angular";
-import { EventMessage, EventType } from '@azure/msal-browser';
+import { MsalBroadcastService, MsalService } from "@azure/msal-angular";
+import { AuthenticationResult, EventMessage, EventType, SilentRequest } from '@azure/msal-browser';
 import { filter } from 'rxjs/operators';
+import { RoleApiService } from './services/roles-api';
+import { UserApiService } from './services/user.service';
+import { AppUser, UndefinedUser } from './types';
 
 @Component({
   selector: 'hs-root',
   template: `<div class="hs-root">
       <router-outlet></router-outlet>   
-  </div>`
+  </div>`,
+  providers: [UserApiService]
 })
 export class AppComponent implements OnInit, OnDestroy {
   title = 'azure-sso-ui';
 
-  constructor(private _msalSvc: MsalBroadcastService) {}
+  constructor(
+    private _userSvc: UserApiService,
+    private _msalSvc: MsalService) { }
 
   ngOnInit(): void {
-    this._msalSvc.msalSubject$
-    .pipe(
-      filter((msg: EventMessage) => msg.eventType == EventType.LOGIN_SUCCESS)
-    )
-    .subscribe((result) => {
-      console.log(result);
-      // TODO: fetch user roles and permission
-    })
+    
   }
 
   ngOnDestroy(): void {

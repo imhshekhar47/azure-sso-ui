@@ -1,4 +1,4 @@
-import { AppRole, AppScope } from "./user";
+import { AppRole, AppScope } from "./access";
 
 export declare type AppLinkCriteria = 'hasAny' | 'hasAll';
 

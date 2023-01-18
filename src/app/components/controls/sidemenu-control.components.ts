@@ -8,20 +8,23 @@ import { AppLink, AppUser } from 'src/app/types';
         <div mat-subheader *ngIf="link.isGroup">{{ link.label }}</div>
         <mat-divider></mat-divider>
         <mat-list-item role="listitem" *ngFor="let child of link.children">
-            <button mat-flat-button class="list-button" [routerLink]="child.path">
+            <button mat-button class="list-button" [routerLink]="child.path">
                 <mat-icon>arrow_right</mat-icon> {{ child.label }} 
             </button>
         </mat-list-item>
     </mat-list>
 </div>`,
-styles:[
-    `.list-button {
+styles:[`
+    .list-button {
         width: 100%;
         padding-left: 20px;
         justify-content: left;
         font-weight: 400;
-    }`
-]
+    }
+    .mdc-list-item {
+        padding-left: 0;
+    }
+    `]
 })
 export class SideMenuControlComponent implements OnInit {
     @Input() user!: AppUser;

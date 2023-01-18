@@ -19,7 +19,7 @@ import { environment } from 'src/environments/environment';
                 <span>${environment.title}</span>
             <span class="flex auto"></span>
             <div class="flex row center">
-                <span class="mat-body pl-1 pr-1"> {{ user.username }} </span>
+                <button mat-button class="mat-body pl-1 pr-1" routerLink="/app/user"> {{ user.name || user.username }} </button>
                 <button mat-button color="accent" sze="xs" (click)="logout()"><mat-icon>logout</mat-icon>Logout</button>
             </div>
             </mat-toolbar-row>
@@ -37,7 +37,7 @@ export class NavigationControlComponent implements OnInit {
     ngOnInit() { }
 
     logout() {
-        const account = this._msalSvc.instance.getAllAccounts()[0];
+        const account = this._msalSvc.instance.getActiveAccount();
         this._msalSvc.instance.setActiveAccount(null);
         this._msalSvc.instance.logout({
             account: account,

@@ -6,5 +6,9 @@ export const environment = {
         clientId: '',
         tenantId: '',
         issuerUrl: 'https://login.microsoftonline.com',
+        clientScope: '',                                        // example api://<app-id>/<app-scope>
+    },
+    apiEndpoints : {
+        roleApi: "http://localhost:8080"
     }
 }

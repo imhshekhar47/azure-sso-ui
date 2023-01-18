@@ -4,8 +4,6 @@ import { Observable } from 'rxjs';
 import { UserProfile } from '../types/user';
 
 
-
-
 @Injectable({providedIn: 'root'})
 export class GraphApiService {
 

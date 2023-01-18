@@ -1,3 +1,4 @@
+import { AppRole, AppScope } from "./access";
 
 export interface UserProfile {
     id: string,
@@ -11,20 +12,28 @@ export interface UserProfile {
 
 export const UndefinedUserProfile: UserProfile = { id: "", displayName: "Anonymous", givenName: "anonymous", jobTitle: "", mail: "" };
 
-export declare type AppRole = 'role_user' | 'role_admin' | 'role_uk' | 'role_nonuk';
 
-export declare type AppScope = 
-    'scope_customer:read' | 'scope_customer:write'
 
 export class AppUser {
 
+    private _profile: UserProfile | undefined;
+
     constructor(
         public username: string,
-        public profile?: UserProfile,
-        private roles?: Array<AppRole>,
-        private permissions?: Array<AppScope>) { }
+        public name?: string,
+        public roles?: Array<AppRole>,
+        public permissions?: Array<AppScope>) { }
 
     
+    getProfile() {
+        return this._profile;
+    }
+
+    setProfile(profile: UserProfile) {
+        this._profile = profile;
+    }
+
+
     isValid(): boolean {
         return this != UndefinedUser;
     }
