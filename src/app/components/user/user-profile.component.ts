@@ -55,11 +55,11 @@ export class UserAccessComponent {
                 </div>
             </mat-card-content>
         </mat-card>
-
-        {{ user | json}}
     </div>`,
     styles: [`
-
+        :host {
+            flex: 1;
+        }
     `]
 })
 

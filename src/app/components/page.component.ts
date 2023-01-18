@@ -15,7 +15,7 @@ import { AppLink } from '../types';
                     </mat-list-item>
                 </mat-list>
             </div>
-            <div class="flex auto center">
+            <div class="flex auto center pl-2 pr-2">
                 <router-outlet></router-outlet>
             </div>
         </div>
@@ -23,10 +23,6 @@ import { AppLink } from '../types';
     styles: [`
     .hs-page {
             margin: 0px;
-    }
-
-    .menu-col {
-        padding-right: 8px;
     }
 
     .menu {

@@ -11,6 +11,7 @@ import {  AuthenticationResult, EventMessage, EventType, InteractionStatus } fro
 @Component({
     selector: 'hs-main',
     template: `<div class="hs-main">
+        <mat-progress-bar *ngIf="!user" mode="indeterminate" color="accent"></mat-progress-bar>
         <hs-navigation-control *ngIf="user" [user]="user"></hs-navigation-control>
     </div>`,
     providers: [UserApiService]
